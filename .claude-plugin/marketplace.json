@@ -1,0 +1,22 @@
+{
+  "name": "prospectflo",
+  "description": "ProspectFlo Envoy for coding agents: run your cold email account from your agent.",
+  "owner": {
+    "name": "ProspectFlo",
+    "url": "https://prospectflo.com"
+  },
+  "plugins": [
+    {
+      "name": "prospectflo",
+      "source": "./",
+      "description": "Connect your agent to ProspectFlo Envoy: lead lists, campaigns, the Review Queue, the Enbox and replies, as you, after you sign in.",
+      "category": "productivity",
+      "tags": [
+        "cold-email",
+        "outreach",
+        "sales",
+        "mcp"
+      ]
+    }
+  ]
+}

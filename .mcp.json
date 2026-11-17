@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "prospectflo": {
+      "type": "http",
+      "url": "https://prospectflo.com/mcp"
+    }
+  }
+}

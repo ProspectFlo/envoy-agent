@@ -1,0 +1,41 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "prospectflo",
+  "version": "0.1.0",
+  "description": "Run your ProspectFlo Envoy cold email account from your agent: lead lists, Review Queue, campaigns, the Enbox and replies. You sign in once; the agent acts as you, with your plan's limits.",
+  "author": {
+    "name": "ProspectFlo",
+    "url": "https://prospectflo.com"
+  },
+  "homepage": "https://prospectflo.com",
+  "repository": "https://github.com/prospectflo/envoy-agent",
+  "license": "LicenseRef-ProspectFlo-All-Rights-Reserved",
+  "keywords": [
+    "cold-email",
+    "outreach",
+    "sales",
+    "lead-lists",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/setup/SKILL.md",
+      "interface": {
+        "displayName": "ProspectFlo Envoy",
+        "shortDescription": "Cold email from your agent",
+        "longDescription": "Connect your agent to ProspectFlo Envoy. Build and review lead lists, write and run campaigns, and handle replies in the Enbox, as you, after you sign in. Envoy never buys inboxes or domains and never touches billing through the agent.",
+        "developerName": "ProspectFlo",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive",
+          "Write"
+        ],
+        "websiteURL": "https://prospectflo.com",
+        "privacyPolicyURL": "https://prospectflo.com/privacy",
+        "termsOfServiceURL": "https://prospectflo.com/terms#ai-agents",
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png"
+      }
+    }
+  }
+}

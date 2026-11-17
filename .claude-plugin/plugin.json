@@ -1,0 +1,21 @@
+{
+  "name": "prospectflo",
+  "displayName": "ProspectFlo Envoy",
+  "version": "0.1.0",
+  "description": "Run your ProspectFlo Envoy cold email account from your agent: lead lists, Review Queue, campaigns, the Enbox and replies. You sign in once; the agent acts as you, with your plan's limits.",
+  "author": {
+    "name": "ProspectFlo",
+    "url": "https://prospectflo.com"
+  },
+  "homepage": "https://prospectflo.com",
+  "repository": "https://github.com/prospectflo/envoy-agent",
+  "privacyPolicyUrl": "https://prospectflo.com/privacy",
+  "license": "LicenseRef-ProspectFlo-All-Rights-Reserved",
+  "keywords": [
+    "cold-email",
+    "outreach",
+    "sales",
+    "lead-lists",
+    "mcp"
+  ]
+}
