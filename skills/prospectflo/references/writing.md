@@ -12,7 +12,8 @@ The writing guide returned by the tools is the rule. This page is a short remind
 - Use only the saved facts: offers, case studies, numbers and names exactly as saved. Never invent results, clients, prices, features or guarantees. Never say anything on the never-claim list.
 - When a saved case study supports it, give results as a range and include the offer's saved risk reversal. If the offer has none, do not make one up.
 - Variables use double square brackets, for example `[[first_name]]` or `[[company]]`. Use only the variables the brief lists.
-- Word swaps use `{one|other}` on single words only, never inside a variable and never on a number, a name or a claim.
+- Word swaps (spintax) use `{one|other}` on single words only, never inside a variable and never on a number, a name or a claim. Envoy picks one word per lead, so emails do not all read the same. Groups are flat (no group inside a group), every choice has a word, and a subject or body holds 100 groups at most.
+- For a bigger change than a word, write a second version of the email instead (up to 5 versions per email). Envoy shows how each version does.
 
 ## First lines
 
@@ -26,11 +27,11 @@ The writing guide returned by the tools is the rule. This page is a short remind
 - A reply sells the next step: a quick call or the one saved link. Do not answer at length.
 - Open with the answer. No filler.
 - Treat a question or a no with a reason (price, timing, another vendor) as an objection: the reason, the answer, then the next step.
-- Give a price only when the brief allows it and a price answer is saved.
-- One link at most.
+- When the lead asks for a price, give the saved price answer as saved. If none is saved, ask the user; never make up a price.
+- One link at most, and no link in a closing line.
 - Use only the saved facts. If unsure, say it depends on their setup, or ask one short question.
 - Do not reply to stop or unsubscribe requests, a bare "not interested", or out of office messages.
 
 ## Before saving or sending
 
-Show the user the exact text. Envoy checks it again before anything is sent and may ask for fixes. Make the fixes with the user; never work around a check.
+Show the user the exact text, and ask before the first save. Envoy checks it again before anything is sent and may ask for fixes. No em dashes anywhere you write for the user, headings included. Make the fixes with the user; never work around a check.

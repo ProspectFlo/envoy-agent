@@ -1,6 +1,6 @@
 {
   "name": "prospectflo",
-  "version": "0.1.0",
+  "version": "0.3.2",
   "description": "Run your ProspectFlo Envoy cold email account from your agent: lead lists, Review Queue, campaigns, the Enbox and replies. You sign in once; the agent acts as you, with your plan's limits.",
   "author": {
     "name": "ProspectFlo",

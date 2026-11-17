@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^mcp__plugin_prospectflo_prospectflo__(approve_followup|approve_leads|build_a_list|clear_list_leads|import_instant_leads|import_leads|link_list_to_campaign|send_reply|start_campaign)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"ProspectFlo: this can send email or delete leads. Check the preview your agent showed you, then allow it only if it is what you want.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
