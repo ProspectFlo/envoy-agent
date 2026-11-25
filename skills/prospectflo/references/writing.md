@@ -17,8 +17,7 @@ The writing guide returned by the tools is the rule. This page is a short remind
 
 ## First lines
 
-- Two ways to add personal first lines: write them with the user in batches (`get_leads_for_first_lines` then `save_first_lines`) or queue Envoy's built-in first-line writer (`queue_ai_first_lines` and `get_ai_first_lines_status`).
-- When you write lines with the user: one short opening line per lead, in plain spoken words.
+- Write personal first lines yourself with the user in batches (`get_leads_for_first_lines` then `save_first_lines`), one short opening line per lead, in plain spoken words.
 - If the account has a clear offer, state it plainly. Otherwise ask a question a customer of this lead would ask, tied to the email that follows, then a short transition into that email.
 - Use only the facts given. Never invent a fact, a number or a name. No emoji and no em dashes.
 - Leave a lead out if nothing true can be said.

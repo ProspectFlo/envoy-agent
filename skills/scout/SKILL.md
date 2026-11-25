@@ -47,8 +47,9 @@ Follow the prospectflo skill. Envoy Scout is the desktop app that finds new lead
 
 ## Build a List
 
-1. Ask: what kind of business (in plain words), where, job titles and keywords if any, how many leads, the list name, and any advanced targeting or first-line preferences:
-   - `lead_kind` (`"decision_makers"` or `"companies"`), `lookalikes`, `competitors`, `exclusions`, `company_size`, `volume` (`focused`, `nearby`, `state`, `national`), `match` (`exact`, `close`, `similar`), `running_ads`, `posting_videos`, `signals`, `uses`, `not_uses`, `only_new_companies`, `limit_mode` (`total` or `daily`), `daily_lead_limit`, `auto_clean`, `auto_approve`, `campaign_id`, and first-line fields (`ai_first_line`, `first_line_ai_decides`, `first_line_examples`, `first_line_note`).
+1. Ask: what kind of business (in plain words), where, job titles and keywords if any, how many leads, the list name, and any targeting preferences:
+   - `lead_kind` (`"decision_makers"` or `"companies"`), `lookalikes`, `competitors`, `exclusions`, `company_size`, `volume` (`focused`, `nearby`, `state`, `national`), `match` (`exact`, `close`, `similar`), `running_ads`, `posting_videos`, `uses`, `not_uses`, `only_new_companies`, `limit_mode` (`total` or `daily`), `daily_lead_limit`, `auto_clean`, and `campaign_id`.
+   - Scout runs never use Envoy signals, auto-approve, or Envoy AI first lines: leads land in Review Queue so you evaluate fit with the user (`get_review_queue` -> `approve_leads` / `dismiss_leads`) and write personalized first lines yourself (`get_leads_for_first_lines` -> `save_first_lines`).
 2. First call `build_a_list` with those. It saves the list paused and returns a preview. Show the preview in plain words.
 3. Then ask, as its own question: "Start finding leads now? About 500 for Dentists Austin." Only after a yes, call `build_a_list` again with `list_build_id` and `confirmed: true` (and the `confirmation_token` if the preview gave one). If the list adds its leads to a campaign that is sending, those leads will be emailed: say so, end your turn, and go ahead only after a yes to that too.
    If Envoy says Scout is not connected, offer: "Shall I download Envoy Scout for this computer?" and follow Install and connect (above) on a yes. Otherwise help the user open Scout, and try again later.

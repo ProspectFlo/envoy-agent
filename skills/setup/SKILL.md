@@ -67,7 +67,7 @@ Follow the `campaign` skill:
 - Ask which sending inboxes and what daily limit to use, and wait for the answer (never pick inboxes or a daily limit yourself, not even the default).
 - `create_campaign`, read `get_campaign_writing_brief`, write the sequence with optional word swaps, show the full draft before `save_campaign_sequence`.
 - Configure `save_campaign_schedule`, `save_campaign_options` (including compliant footer or custom footer text) and optional `save_campaign_reply_agent`.
-- Link the list (`preview_list_link` + `link_list_to_campaign`) and add first lines (`queue_ai_first_lines` or write in batches with `get_leads_for_first_lines` + `save_first_lines`).
+- Link the list (`preview_list_link` + `link_list_to_campaign`) and write personalized first lines yourself in batches (`get_leads_for_first_lines` + `save_first_lines`).
 - Check `get_campaign` readiness (`readiness` section). Never start without showing `start_campaign` preview, saying it will email real leads from their inboxes, ending your turn, and receiving a clear yes.
 
 ## Step 6: Optional reply automation

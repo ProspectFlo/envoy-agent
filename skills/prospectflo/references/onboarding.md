@@ -26,7 +26,7 @@ Start every onboarding run with an automatic account audit (`get_account_overvie
 Three ways, and the user picks:
 
 - **Instant leads** (ready now): `search_instant_leads` with a plain description of who to find, plus job titles, keywords, example websites or a place. Rows show masked email and phone. Always tell the user the `place_note` it returns. Import the rows the user wants with `import_instant_leads`, into an existing list (`list_id`), a new one (`new_list_name`), or directly to a campaign (`campaign_id`). Imports count toward the daily import allowance.
-- **Build a List** (new leads found live by Envoy Scout): first call `build_a_list` with name, who, where, targeting fields (lookalikes, competitors, exclusions, company size, volume, match, signals, uses/not_uses, lead_kind, auto_clean, auto_approve, first-line options) and lead_count. Show the preview. Ask "Start finding leads now?" as its own question. Only after a yes, call it again with `list_build_id` and `confirmed: true` (and `confirmation_token` if returned). Check progress with `get_list_run`, pause/resume/cancel with `pause_list_run` / `resume_list_run` / `cancel_list_run`, and see leads with `get_list_run_leads`.
+- **Build a List** (new leads found live by Envoy Scout): first call `build_a_list` with name, who, where, targeting fields (lookalikes, competitors, exclusions, company size, volume, match, uses/not_uses, lead_kind, auto_clean) and lead_count. Scout never runs Envoy signals, auto-approve, or Envoy AI first lines; leads land in Review Queue so you decide fit (`get_review_queue` -> `approve_leads` / `dismiss_leads`) and write first lines yourself (`save_first_lines`). Show the preview. Ask "Start finding leads now?" as its own question. Only after a yes, call it again with `list_build_id` and `confirmed: true` (and `confirmation_token` if returned). Check progress with `get_list_run`, pause/resume/cancel with `pause_list_run` / `resume_list_run` / `cancel_list_run`, and see leads with `get_list_run_leads`.
 - **Upload CSV or public Google Sheet + verify + enrich**: call `fetch_public_google_sheet` for a shared Google Sheet link or take the user's CSV rows, call `upload_and_enrich_list` (supports verify and optional Scout enrichment), track email verification with `verify_list_emails` / `get_list_verification`, and track enrichment with `enrich_leads` / `get_enrichment_status`.
 
 ## 5. Review Queue and list management
@@ -48,8 +48,8 @@ Three ways, and the user picks:
 
 ## 7. First lines
 
-- Two options: let Envoy queue AI first lines (`queue_ai_first_lines` + `get_ai_first_lines_status`), or write personal first lines together in batches (`get_leads_for_first_lines` + `save_first_lines`).
-- When writing in batches: get the email the lines lead into (`email_copy` or `campaign_id`, else linked campaign), write up to 100 per call, show a short sample first, leave a lead out when nothing true can be said, and report progress after each batch.
+- Write personal first lines yourself in batches (`get_leads_for_first_lines` + `save_first_lines`); never queue Envoy's server-side AI writer.
+- Get the email the lines lead into (`email_copy` or `campaign_id`, else linked campaign), write up to 100 per call, show a short sample first, leave a lead out when nothing true can be said, and report progress after each batch.
 
 ## 8. Start and reply mode
 

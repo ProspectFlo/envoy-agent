@@ -67,20 +67,18 @@ Campaign writes (`save_campaign_sequence`, `save_campaign_options`, `save_campai
 
 - `get_scout_status`: check whether the user's Envoy Scout desktop app is online and paired.
 - `get_scout_download`: get the official Envoy Scout installer link for macOS or Windows so you can offer to download Envoy Scout for this computer.
-- `build_a_list` (**ask first**): create a Scout 3.0 targeting run from business facts, geography, buyer titles and signals; always preview (`confirmed: false`), show target summary and ask first before `confirmed: true`.
+- `build_a_list` (**ask first**): create a Scout 3.0 targeting run from business facts, geography and buyer titles (no Envoy signals, auto-approve, or Envoy AI first lines; leads land in Review Queue for you to evaluate fit and write first lines); always preview (`confirmed: false`), show target summary and ask first before `confirmed: true`.
 - `update_list_build`: update targeting filters or settings on an existing list build before running.
 - `get_list_run`: check run progress, discovered count and health for one Scout build.
 - `get_list_run_leads`: inspect discovered leads and evidence from a Scout run.
 - `pause_list_run`: pause an active Scout list run.
-- `resume_list_run` (**ask first**): resume a paused Scout list run (asks first with a preview when the run auto-approves or syncs into a sending campaign).
+- `resume_list_run` (**ask first**): resume a paused Scout list run (asks first with a preview when the run feeds a sending campaign).
 - `cancel_list_run`: cancel a Scout run that is no longer needed.
 
 ## First lines
 
-- `queue_ai_first_lines`: queue Envoy's automated personalized first-line generation for approved leads in a list or campaign.
-- `get_ai_first_lines_status`: check completion count and readiness of queued first lines.
-- `get_leads_for_first_lines`: fetch approved leads that need first lines so you can draft crisp custom openers for them when asked.
-- `save_first_lines`: save agent-written custom first lines onto lead records cleanly before starting outreach.
+- `get_leads_for_first_lines`: fetch leads that need first lines so you write crisp custom openers yourself from the lead facts.
+- `save_first_lines`: save your custom first lines onto lead records cleanly before starting outreach.
 
 ## Campaigns
 

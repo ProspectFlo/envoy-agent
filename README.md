@@ -4,11 +4,11 @@ Run your ProspectFlo Envoy cold email account from the coding agent you already 
 
 You need a ProspectFlo plan (the 7-day trial works). Using an agent with Envoy is covered by the terms at https://prospectflo.com/terms#ai-agents.
 
-## Quick start (about 60 seconds)
+## Quick start (about 60 seconds, no terminal needed)
 
-1. Run the install command for your agent below.
-2. Start your agent and ask anything about ProspectFlo. A ProspectFlo sign-in page opens in your browser. Sign in, confirm with your password or two-step code, accept the agent terms, and choose what the agent may do: read, write, and send.
-3. Go back to your agent and try one of the requests below.
+1. Copy the message for your agent below and paste it straight into your agent chat (or run the terminal command if you prefer). Your agent downloads and installs the ProspectFlo plugin for you.
+2. When a ProspectFlo sign-in page opens in your browser, sign in, confirm with your password or two-step code, accept the agent terms, and choose what the agent may do: read, write, and send.
+3. Go back to your agent and follow the guided setup.
 
 ### Claude Code
 
@@ -16,7 +16,11 @@ You need a ProspectFlo plan (the 7-day trial works). Using an agent with Envoy i
 claude plugin install prospectflo --marketplace prospectflo/envoy-agent
 ```
 
-Inside a session you can run `/plugin install prospectflo --marketplace prospectflo/envoy-agent` instead. To sign in again later, run `/mcp` and choose `prospectflo`. Commands start with `/prospectflo:`, for example `/prospectflo:inbox`.
+No terminal needed: paste this straight into Claude:
+
+> Install the ProspectFlo plugin from prospectflo/envoy-agent (run `/plugin install prospectflo --marketplace prospectflo/envoy-agent` or `claude plugin install prospectflo --marketplace prospectflo/envoy-agent`), connect my ProspectFlo account, and run `/prospectflo:setup`.
+
+Using Claude Desktop, Cowork, or claude.ai without Claude Code? Open **Customize -> Connectors -> Add custom connector** and paste `https://prospectflo.com/mcp`. To sign in again later in Claude Code, run `/mcp` and choose `prospectflo`. Commands start with `/prospectflo:`, for example `/prospectflo:inbox`.
 
 ### Codex
 
@@ -26,13 +30,21 @@ codex plugin add prospectflo@prospectflo
 codex mcp add prospectflo --url https://prospectflo.com/mcp
 ```
 
-The last line signs you in: a ProspectFlo page opens in your browser; press Allow. Codex's command line has no other way to sign in a plugin. In the Codex app you can instead open `/plugins`, install ProspectFlo Envoy and sign in when it asks. Setup starts on its own after install. To run a command, type `$` and pick one, for example `$prospectflo:inbox`.
+No terminal needed: paste this straight into Codex:
+
+> Install the ProspectFlo plugin from prospectflo/envoy-agent (`codex plugin marketplace add prospectflo/envoy-agent` and `codex plugin add prospectflo@prospectflo`), connect my ProspectFlo account at `https://prospectflo.com/mcp`, and run `$prospectflo:setup`.
+
+The last line signs you in: a ProspectFlo page opens in your browser; press Allow. In the Codex app you can also open `/plugins`, install ProspectFlo Envoy and sign in when it asks. To run a command, type `$` and pick one, for example `$prospectflo:inbox`.
 
 ### Antigravity
 
 ```bash
 agy plugin install https://github.com/prospectflo/envoy-agent
 ```
+
+No terminal needed: paste this straight into Antigravity:
+
+> Install the ProspectFlo plugin from https://github.com/prospectflo/envoy-agent (`agy plugin install https://github.com/prospectflo/envoy-agent`), connect my ProspectFlo account, and run `/setup`.
 
 Commands are plain slash commands, for example `/inbox`.
 
@@ -42,11 +54,19 @@ Commands are plain slash commands, for example `/inbox`.
 grok plugin install prospectflo/envoy-agent
 ```
 
-Inside a session you can run `/plugins install https://github.com/prospectflo/envoy-agent` instead. Ask in plain words; the agent picks the right ProspectFlo skill.
+No terminal needed: paste this straight into Grok Build:
+
+> Install the ProspectFlo plugin from prospectflo/envoy-agent (`grok plugin install prospectflo/envoy-agent` or `/plugins install https://github.com/prospectflo/envoy-agent`), connect my ProspectFlo account, and set up my ProspectFlo account.
+
+Ask in plain words; the agent picks the right ProspectFlo skill.
 
 ### Cursor
 
-Cursor has no ProspectFlo plugin. Add the ProspectFlo server to the file `.cursor/mcp.json` in your home folder (create the file if it is missing; if it already lists other servers, add only the `prospectflo` entry):
+No terminal needed: paste this straight into Cursor:
+
+> Add the ProspectFlo server at `https://prospectflo.com/mcp` to your Cursor config file in my home folder, tell me when to restart and turn on `prospectflo` under Customize, and then set up my ProspectFlo account.
+
+Or add it to `.cursor/mcp.json` in your home folder (create the file if it is missing; if it already lists other servers, add only the `prospectflo` entry):
 
 ```json
 {
@@ -58,7 +78,7 @@ Cursor has no ProspectFlo plugin. Add the ProspectFlo server to the file `.curso
 }
 ```
 
-Restart Cursor, then turn on `prospectflo` under Customize. A ProspectFlo page opens in your browser: sign in and press Allow. In the Cursor command line, run `agent mcp login prospectflo` instead. Ask in plain words; Cursor has no ProspectFlo commands.
+Restart Cursor, then turn on `prospectflo` under Customize. A ProspectFlo page opens in your browser: sign in and press Allow. Ask in plain words; Cursor has no ProspectFlo commands.
 
 ### Any other agent
 
