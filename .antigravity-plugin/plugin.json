@@ -2,8 +2,8 @@
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "prospectflo",
   "displayName": "ProspectFlo Envoy",
-  "version": "0.3.2",
-  "description": "Run your ProspectFlo Envoy cold email account from your agent: lead lists, Review Queue, campaigns, the Enbox and replies.",
+  "version": "0.4.0",
+  "description": "Run your ProspectFlo Envoy cold email account from your agent: guided setup, inbox guides and checkout prep, lead lists, campaigns, Auto-Reply and the Enbox.",
   "author": {
     "name": "ProspectFlo",
     "url": "https://prospectflo.com"
@@ -13,10 +13,11 @@
   "license": "LicenseRef-ProspectFlo-All-Rights-Reserved",
   "logo": "assets/logo.png",
   "suggestedPrompts": [
-    "Show me my ProspectFlo account and what to set up next",
+    "Set up my ProspectFlo account",
+    "Check my sending inboxes or quote new Google Workspace inboxes",
     "Show me my new ProspectFlo replies",
     "Help me write my first ProspectFlo campaign",
-    "Find 200 ProspectFlo Instant leads for dentists in Austin",
-    "How is my ProspectFlo campaign doing?"
+    "Upload and verify leads from a Google Sheet or build a Scout list",
+    "Turn on Auto-Reply or schedule a reply check"
   ]
 }

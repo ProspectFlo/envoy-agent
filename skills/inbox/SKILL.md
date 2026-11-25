@@ -1,6 +1,6 @@
 ---
 name: inbox
-description: Show the user's new ProspectFlo Envoy replies as a short, clean list, and open one conversation when the user picks it. Use when the user asks about replies, the Enbox, who wrote back, new messages, interested leads or meetings.
+description: Show the user's new ProspectFlo Envoy replies as a short, clean list, open, archive or mark conversations read, compose a new email on yes, or check follow-ups and Enbox reply settings. Use when the user asks about replies, the Enbox, who wrote back, new messages, composing an email, interested leads or meetings.
 ---
 
 ## Hard limits
@@ -31,8 +31,11 @@ Follow the prospectflo skill. This page covers looking at replies. To answer one
 3. End with one line: "Say a number to open it, or ask me to label or answer one."
 4. When the user picks one, call `get_thread` for that one only. Show each message as a block, oldest first: who wrote it and when, then the text. Then offer: answer it, label it, or see its follow-ups.
 5. Label only when the user asks: `set_thread_label` with interested, not_interested, lead, meeting or none. Say "Labeled Interested. You can see it in the Enbox."
-6. Follow-ups for a conversation: `list_followups`. Approving one sends it, so show its preview (the recipient and the text) and call `approve_followup` again with the `confirmation_token` only after the user said yes to that draft. `stop_followup` only when the user asks.
-7. More rows only when the user asks: send the `cursor` from the last answer.
+6. Archive or mark read when the user asks: `archive_thread` or `mark_thread_read`.
+7. Compose a new email from Enbox when the user asks: check connected inboxes with `get_inbox_status`, show the draft (sender inbox, recipient, subject, body), call `compose_email` without a token to get its preview and `confirmation_token`, end your turn, and call again with the token only after a clear yes.
+8. Follow-ups for a conversation: `list_followups`. Approving one sends it, so show its preview (the recipient and the text) and call `approve_followup` again with the `confirmation_token` only after the user said yes to that draft. `stop_followup` only when the user asks.
+9. Auto-Reply or scheduled reply checks: check `get_enbox_settings` and follow the `autoreply` skill if the user asks to turn on Envoy's guarded Auto-Reply or set up a recurring check.
+10. More rows only when the user asks: send the `cursor` from the last answer.
 
 ## What to know
 

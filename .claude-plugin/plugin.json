@@ -1,8 +1,8 @@
 {
   "name": "prospectflo",
   "displayName": "ProspectFlo Envoy",
-  "version": "0.3.2",
-  "description": "Run your ProspectFlo Envoy cold email account from your agent: lead lists, Review Queue, campaigns, the Enbox and replies. You sign in once; the agent acts as you, with your plan's limits.",
+  "version": "0.4.0",
+  "description": "Run your ProspectFlo Envoy cold email account from your agent: guided setup, inbox connection guides and checkout preparation, lead lists, Scout targeting, CSV and Google Sheet upload, campaigns, Auto-Reply and the Enbox. You sign in once; the agent acts as you, with your plan's limits.",
   "author": {
     "name": "ProspectFlo",
     "url": "https://prospectflo.com"

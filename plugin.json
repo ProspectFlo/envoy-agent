@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "prospectflo",
-  "version": "0.3.2",
-  "description": "Run your ProspectFlo Envoy cold email account from your agent: lead lists, Review Queue, campaigns, the Enbox and replies. You sign in once; the agent acts as you, with your plan's limits.",
+  "version": "0.4.0",
+  "description": "Run your ProspectFlo Envoy cold email account from your agent: guided setup, inbox connection guides and checkout preparation, lead lists, Scout targeting, CSV and Google Sheet upload, campaigns, Auto-Reply and the Enbox. You sign in once; the agent acts as you, with your plan's limits.",
   "author": {
     "name": "ProspectFlo",
     "url": "https://prospectflo.com"
@@ -23,7 +23,7 @@
       "interface": {
         "displayName": "ProspectFlo Envoy",
         "shortDescription": "Cold email from your agent",
-        "longDescription": "Connect your agent to ProspectFlo Envoy. Build and review lead lists, write and run campaigns, and handle replies in the Enbox, as you, after you sign in. Envoy never buys inboxes or domains and never touches billing through the agent.",
+        "longDescription": "Connect your agent to ProspectFlo Envoy. Audit your account, connect or quote new inboxes (with Stripe Checkout links you complete yourself), find or upload and verify leads, write and run campaigns, manage Auto-Reply, and handle replies in the Enbox, as you, after you sign in. Envoy never charges a card or asks for email passwords in chat.",
         "developerName": "ProspectFlo",
         "category": "Productivity",
         "capabilities": [

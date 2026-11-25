@@ -1,6 +1,6 @@
 # Setting up ProspectFlo Envoy, step by step
 
-Work with the user one step at a time. Show what you plan to save before saving it. "Set everything up" still means one step at a time, each with a preview and a yes.
+Start every onboarding run with an automatic account audit (`get_account_overview`, `get_ai_agent_setup`, `get_inbox_status`, `get_scout_status`, `list_lead_lists`, `list_campaigns`, `get_enbox_settings`). Present a short Done vs Next checklist, skip everything already complete, and work one step at a time. Show what you plan to save before saving it. "Set everything up" still means one step at a time, each with a preview and a yes.
 
 ## 1. AI agent setup
 
@@ -10,45 +10,50 @@ Work with the user one step at a time. Show what you plan to save before saving 
 - Save with `save_ai_agent_setup`. Send only the fields that change. A list field sent replaces the whole list, so send every offer, not only the new one.
 - If the save returns `conflict`, read the setup again and redo the change on the new revision.
 
-## 2. A lead list
+## 2. Inboxes
 
-Two ways, and the user picks:
+- Always check `get_inbox_status` first. Show connected count, warmup readiness (`Ready`, `Warming`, `Paused`, `Needs attention`) and daily capacity.
+- **Connect existing inboxes:** call `get_inbox_connect_guide` and share the steps and direct web app links (Gmail App Password, Microsoft OAuth link, or custom SMTP). Never accept passwords in chat. Re-check `get_inbox_status` after the user connects.
+- **Buy new inboxes:** explain options with `get_inbox_buying_advice`, then either check custom domains (`check_inbox_domains`) or list Instant prewarmed domains (`list_instant_inboxes`), call `quote_inbox_order`, and call `prepare_inbox_checkout` for a preview + confirmation token. Only after a yes in the next turn, call `prepare_inbox_checkout` with the token and give the user the Stripe Checkout link so they complete payment themselves.
 
-- **Instant leads** (ready now): `search_instant_leads` with a plain description of who to find, plus job titles, keywords, example websites or a place. Rows show masked email and phone. Always tell the user the `place_note` it returns. Import the rows the user wants with `import_instant_leads`, into an existing list (`list_id`) or a new one (`new_list_name`). Imports count toward the daily import allowance.
-- **Build a List** (new leads found by Envoy Scout): first call `build_a_list` with name, who, where, optional titles and keywords, and lead_count. Show the preview. Ask "Start finding leads now?" as its own question. Only after a yes, call it again with `list_build_id` and `confirmed: true`. Envoy Scout must be installed and open on one of the user's computers (see the `scout` skill). If Envoy says Scout is not connected, offer to download Envoy Scout for this computer. Check progress with `get_list_run` and see leads with `get_list_run_leads`. Check now and then when the user asks, not in a tight loop.
+## 3. Envoy Scout
 
-## 3. Review Queue
+- Required for live `build_a_list` runs and `enrich_leads`. Not required for `search_instant_leads` / `import_instant_leads` or `upload_and_enrich_list` (verification only).
+- Check `get_scout_status`. When Scout is not connected and the user needs it, offer to download Envoy Scout for this computer (`"Shall I download Envoy Scout for this computer?"`), then follow the `scout` skill on a yes.
 
-- `get_review_queue` shows leads waiting for a decision, one page at a time.
+## 4. A lead list
+
+Three ways, and the user picks:
+
+- **Instant leads** (ready now): `search_instant_leads` with a plain description of who to find, plus job titles, keywords, example websites or a place. Rows show masked email and phone. Always tell the user the `place_note` it returns. Import the rows the user wants with `import_instant_leads`, into an existing list (`list_id`), a new one (`new_list_name`), or directly to a campaign (`campaign_id`). Imports count toward the daily import allowance.
+- **Build a List** (new leads found live by Envoy Scout): first call `build_a_list` with name, who, where, targeting fields (lookalikes, competitors, exclusions, company size, volume, match, signals, uses/not_uses, lead_kind, auto_clean, auto_approve, first-line options) and lead_count. Show the preview. Ask "Start finding leads now?" as its own question. Only after a yes, call it again with `list_build_id` and `confirmed: true` (and `confirmation_token` if returned). Check progress with `get_list_run`, pause/resume/cancel with `pause_list_run` / `resume_list_run` / `cancel_list_run`, and see leads with `get_list_run_leads`.
+- **Upload CSV or public Google Sheet + verify + enrich**: call `fetch_public_google_sheet` for a shared Google Sheet link or take the user's CSV rows, call `upload_and_enrich_list` (supports verify and optional Scout enrichment), track email verification with `verify_list_emails` / `get_list_verification`, and track enrichment with `enrich_leads` / `get_enrichment_status`.
+
+## 5. Review Queue and list management
+
+- `get_review_queue` shows leads waiting for a decision, one page at a time (optionally filtered by `list_id`).
 - `approve_leads` sends approved leads into the named campaign, or the campaign their list is linked to. If that campaign is sending, the leads will be emailed: show the preview, ask, and call again with its `confirmation_token` only after a yes.
-- `dismiss_leads` removes leads from the queue. A short reason (wrong industry, too small) helps Envoy find better leads next time.
+- `dismiss_leads` removes leads from the queue. A short reason helps Envoy find better leads next time.
+- Manage lists with `update_lead_list`, `merge_lead_lists`, `copy_approved_leads`, `move_approved_leads`, `remove_lead_from_list`, `archive_lead_list` and `clear_list_leads` (ask first for previews on merges, moves, archives and deletes).
 
-## 4. A campaign
+## 6. A campaign
 
 1. `create_campaign` with a name, and the sending inboxes and daily limit the user picked. Ask and wait for the answer; never pick inboxes or a daily limit yourself, not even the default. Check inboxes first with `get_inbox_status`.
 2. `get_campaign_writing_brief` returns the saved facts, the list's audience and signal, the limits, the variables and the writing guide.
 3. Write the sequence yourself (see `writing.md`). Show the full draft to the user and ask before the first save with `save_campaign_sequence`.
 4. `save_campaign_schedule`: time zone, daily window, days of the week, optional start and end dates.
-5. `save_campaign_options`: inboxes, daily limit, gap between sends, tracking, plain text, stop on reply.
+5. `save_campaign_options`: inboxes, daily limit, gap between sends, tracking, plain text, stop on reply, `group_send`, `unsubscribe_footer` / `unsubscribe_footer_text`, and per-campaign `auto_reply` (turning `auto_reply` on or editing a sending campaign requires confirmation).
 6. `get_campaign_reply_agent` and `save_campaign_reply_agent` for the campaign's own reply settings, if the user wants them.
-7. `link_list_to_campaign`. A list links to one campaign only.
+7. `preview_list_link` then `link_list_to_campaign` (supports `replace_list_link` and `port_leads`). A list links to one campaign only, while a campaign can link multiple lists.
 
-## 5. First lines
+## 7. First lines
 
-- Works for any list, Instant leads lists included, at any size, whenever the user asks you to write first lines.
-- First get the email the lines lead into: the user's own copy or sequence (send it as `email_copy`), or a campaign (send its `campaign_id`). Without either, the list's linked campaign is used; if there is none, the answer says to ask the user.
-- `get_leads_for_first_lines` returns one batch at a time (up to 100 leads), by default only leads with no first line yet, what is known about each and a style note. Send `next_cursor` back for the next batch until it is empty; that is how a list of 10,000 is done.
-- Write one line per lead. Leave a lead out when nothing true can be said.
-- `save_first_lines` saves up to 100 a call, 10 calls a minute, 20,000 lines a day. A lead that already has a line keeps it unless the user asked to replace lines (`replace: true`). When a limit is reached, wait `retry_after_seconds`, then go on with the leads not saved.
-- Give a progress line after each batch, for example: 200 of 640 leads have a first line now.
+- Two options: let Envoy queue AI first lines (`queue_ai_first_lines` + `get_ai_first_lines_status`), or write personal first lines together in batches (`get_leads_for_first_lines` + `save_first_lines`).
+- When writing in batches: get the email the lines lead into (`email_copy` or `campaign_id`, else linked campaign), write up to 100 per call, show a short sample first, leave a lead out when nothing true can be said, and report progress after each batch.
 
-## 6. Start
+## 8. Start and reply mode
 
-- `get_campaign` with the readiness section shows anything still missing.
-- `start_campaign` only when the user asks: show its preview, say it will email its remaining leads, and call again with the `confirmation_token` after a yes. Resuming is the same. If Envoy says it is not ready, show the user what is missing.
-- `pause_campaign` stops sending until it is started again.
-
-## Inboxes
-
-- `get_inbox_status` shows connected inboxes, health, warmup and daily capacity.
-- For buying more inboxes or domains, use `get_inbox_buying_advice` and `search_help` to explain the options, then send the user to the Envoy web app. The agent never buys anything.
+- `get_campaign` with the readiness section shows anything still missing (`get_campaign_send_status` shows runtime send blockers for active campaigns).
+- Note on `no_compliance_address`: tell the user they can add their business mailing address in Settings, Profile, OR save custom unsubscribe footer text (or turn the footer off) in campaign options.
+- `start_campaign` only when the user asks: show its preview, say it will email its remaining leads, end your turn, and call again with the `confirmation_token` after a yes. Resuming is the same. `pause_campaign` stops sending until started again.
+- Offer optional reply handling (`autoreply` skill): enable Envoy's guarded Auto-Reply (`set_auto_reply` with preview + yes) or set up a scheduled reply check (`/schedule` or Codex automations) that prepares drafts and waits for a yes before sending.

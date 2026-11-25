@@ -50,7 +50,17 @@ INSTALL_COMMANDS = {
     "Grok Build": f"grok plugin install {REPO}",
 }
 # The task skills: each runs as /prospectflo:<name> in Claude Code and as a skill elsewhere.
-TASK_SKILLS = ("campaign", "inbox", "leads", "reply", "report", "scout", "setup")
+TASK_SKILLS = (
+    "autoreply",
+    "campaign",
+    "inbox",
+    "inboxes",
+    "leads",
+    "reply",
+    "report",
+    "scout",
+    "setup",
+)
 # Every task skill states these rules in its own words, so they hold when it runs alone.
 TASK_SKILL_RULES = (
     "reverse engineer",
@@ -108,6 +118,17 @@ TASK_RULES = {
     "end your turn": (
         "skills/prospectflo/SKILL.md",
         "skills/campaign/SKILL.md",
+        "skills/inboxes/SKILL.md",
+        "skills/autoreply/SKILL.md",
+        "skills/prospectflo/references/tools.md",
+    ),
+    "`prepare_inbox_checkout`": (
+        "skills/inboxes/SKILL.md",
+        "skills/prospectflo/references/tools.md",
+    ),
+    "Never ask for or accept an email password": ("skills/inboxes/SKILL.md",),
+    "`set_auto_reply`": (
+        "skills/autoreply/SKILL.md",
         "skills/prospectflo/references/tools.md",
     ),
 }
@@ -116,18 +137,30 @@ APPROVAL_LINE = (
     "Keep your agent's approval prompts on for ProspectFlo: it asks you before anything "
     "sends or deletes."
 )
-# Tools that send email or delete (destructiveHint on the server). Claude Code asks the
-# person before each one through the plugin's PreToolUse hook (hooks/hooks.json).
+# Tools that send email, prepare an inbox checkout, turn on Auto-Reply, or delete or
+# archive data (destructiveHint on the server). Claude Code asks the person before each
+# one through the plugin's PreToolUse hook (hooks/hooks.json).
 ASK_TOOLS = (
     "approve_followup",
     "approve_leads",
+    "archive_campaign",
+    "archive_lead_list",
     "build_a_list",
     "clear_list_leads",
+    "compose_email",
+    "discard_unpaid_inbox_order",
+    "enrich_leads",
     "import_instant_leads",
     "import_leads",
     "link_list_to_campaign",
+    "merge_lead_lists",
+    "move_approved_leads",
+    "prepare_inbox_checkout",
+    "resume_list_run",
     "send_reply",
+    "set_auto_reply",
     "start_campaign",
+    "upload_and_enrich_list",
 )
 HOOKS = PLUGIN / "hooks" / "hooks.json"
 CLAUDE_MARKETPLACE = ROOT / ".claude-plugin" / "marketplace.json"
@@ -240,9 +273,13 @@ def test_readme_installs_the_plugin_only():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     blocks = re.findall(r"^### ([^\n]+)\n\n```bash\n(.*?)\n```", readme, re.M | re.S)
     assert dict(blocks) == INSTALL_COMMANDS, blocks
-    # No bare server installs: an agent without the plugin is not offered.
-    for banned in ("mcp.json", "cursor://", "Cursor", "Gemini", "Muse"):
+    # No bare server installs, except Cursor (operator, 23 Nov 2026: "Cursor should be
+    # allowed"), which has no plugin and adds the server by address in its own MCP file.
+    for banned in ("cursor://", "Gemini", "Muse"):
         assert banned not in readme, f"README: {banned}"
+    cursor = re.findall(r"^### Cursor\n.*?```json\n(.*?)\n```", readme, re.M | re.S)
+    assert len(cursor) == 1 and json.loads(cursor[0]) == {"mcpServers": {NAME: {"url": MCP_URL}}}
+    assert readme.count("mcp.json") == 1, "README: mcp.json only in the Cursor step"
     # The only bare server line is Codex's sign-in step.
     assert readme.count("mcp add") == 1, "README: mcp add only in the Codex sign-in step"
     assert "### Any other agent\n\nNot supported." in readme

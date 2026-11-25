@@ -2,11 +2,11 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "^mcp__plugin_prospectflo_prospectflo__(approve_followup|approve_leads|build_a_list|clear_list_leads|import_instant_leads|import_leads|link_list_to_campaign|send_reply|start_campaign)$",
+        "matcher": "^mcp__plugin_prospectflo_prospectflo__(approve_followup|approve_leads|archive_campaign|archive_lead_list|build_a_list|clear_list_leads|compose_email|discard_unpaid_inbox_order|enrich_leads|import_instant_leads|import_leads|link_list_to_campaign|merge_lead_lists|move_approved_leads|prepare_inbox_checkout|resume_list_run|send_reply|set_auto_reply|start_campaign|upload_and_enrich_list)$",
         "hooks": [
           {
             "type": "command",
-            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"ProspectFlo: this can send email or delete leads. Check the preview your agent showed you, then allow it only if it is what you want.\"}}'"
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"ask\",\"permissionDecisionReason\":\"ProspectFlo: this can send email, prepare an inbox order, change Auto-Reply, or delete or archive data. Check the preview your agent showed you, then allow it only if it is what you want.\"}}'"
           }
         ]
       }

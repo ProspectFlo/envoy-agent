@@ -28,7 +28,7 @@ Follow the prospectflo skill. This skill only reads; it changes nothing.
    |---|---|---|---|---|
 
    If an email has versions, show each version's replies and say which is ahead. Say plainly when the numbers are too small to tell yet.
-5. Give at most two next steps, only from what the numbers show, for example: look at the interested replies (the `inbox` skill), or try a second version of the weakest email (the `campaign` skill). For a high bounce rate or low sending, check `get_inbox_status` and use `search_help`.
+5. Give at most two next steps, only from what the numbers show, for example: look at the interested replies (the `inbox` skill), or try a second version of the weakest email (the `campaign` skill). For a high bounce rate or low sending, check `get_campaign_send_status`, `get_campaign_leads`, `get_inbox_status` and `search_help`.
 6. End with where to see it: "Open Campaigns in the web app and choose Dentists Q1 for the full numbers."
 
 ## Stop rules
